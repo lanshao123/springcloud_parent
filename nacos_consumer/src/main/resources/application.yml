@@ -1,0 +1,21 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: nacos-consumer
+  datasource:
+    url: jdbc:mysql://localhost:3306/whwhdemo1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: false
+  identity: MYSQL
+  style: camelhump
