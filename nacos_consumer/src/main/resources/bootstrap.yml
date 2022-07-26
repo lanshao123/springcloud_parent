@@ -1,10 +1,10 @@
 server:
-  port: 9090
+  port: 9092
 spring:
   application:
-    name: nacos-provider
+    name: nacos-consumer
   datasource:
-    url: jdbc:mysql://localhost:3306/provider?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/consumer?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     password: root
     driver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -12,6 +12,10 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+        namespace: fbf927f5-5382-4043-81d7-f5755180977f
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml # 指定yaml 格式的配置
         namespace: fbf927f5-5382-4043-81d7-f5755180977f
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml

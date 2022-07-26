@@ -7,6 +7,7 @@ import com.wh.pojo.Students;
 import com.wh.pojo.Teachers;
 import com.wh.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpEntity;
@@ -30,6 +31,8 @@ import java.util.Map;
 @SuppressWarnings("All")
 @CrossOrigin
 public class TeachersController {
+    @Value("${config.info}")
+    private String info;
     @Autowired
     private TeachersService teachersService;
     //从Nacos注册中心获取服务端的ip、端口、要调用的服务
@@ -48,7 +51,8 @@ public class TeachersController {
      */
     @PostMapping("/findTeacherList/{pageSize}/{num}")
     public PageResult findTeacherList(@PathVariable Integer pageSize, @PathVariable Integer num, @RequestBody Map searchMap){
-       return teachersService.findTeacherList(pageSize,num,searchMap);
+        System.out.println(info);
+        return teachersService.findTeacherList(pageSize,num,searchMap);
     }
 
     /**

@@ -1,8 +1,10 @@
 package com.wh.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wh.entity.PageResult;
 import com.wh.pojo.Teachers;
 
+import java.util.List;
 import java.util.Map;
 
 public interface TeachersService {
@@ -11,4 +13,12 @@ public interface TeachersService {
 
 
     Integer addTeacher(Teachers teachers);
+
+    PageInfo selectPageTeacher(Integer pageSize, Integer num, Map searchMap);
+
+    void deleteTeacher(Integer tid);
+
+    Teachers findTeacherById(Integer tid);
+
+    void editTeacher(Teachers teachers);
 }

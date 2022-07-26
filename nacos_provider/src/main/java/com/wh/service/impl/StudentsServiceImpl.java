@@ -24,4 +24,24 @@ public class StudentsServiceImpl implements StudentsService {
     public void addListStudents(List<Students> students, Integer id) {
         studentsMapper.addListStudents(students,id);
     }
+
+    @Override
+    public List<Students> getStudentListByTid(Integer tid) {
+        Students students=new Students();
+        students.setTid(tid);
+
+        return studentsMapper.select(students);
+    }
+
+    @Override
+    public void addStudentList(List<Students> students,Integer tid) {
+        studentsMapper.addListStudents(students,tid);
+    }
+
+    @Override
+    public void deleteStudent(Integer tid) {
+        Students students=new Students();
+        students.setTid(tid);
+        studentsMapper.delete(students);
+    }
 }

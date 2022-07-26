@@ -9,6 +9,8 @@ import com.wh.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -46,6 +48,34 @@ public class TeachersServiceImpl implements TeachersService {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public PageInfo selectPageTeacher(Integer pageSize, Integer num, Map searchMap) {
+        PageHelper.startPage(pageSize,num);
+        Example example=new Example(Teachers.class);
+        Example.Criteria criteria = example.createCriteria();
+        if(StringUtil.isNotEmpty((String) searchMap.get("name"))){
+            criteria.andLike("name","%"+searchMap.get("name")+"%");
+        }
+        List<Teachers> list = teachersMapper.selectByExample(example);
+        return  new PageInfo(list);
+
+    }
+
+    @Override
+    public void deleteTeacher(Integer tid) {
+        teachersMapper.deleteByPrimaryKey(tid);
+    }
+
+    @Override
+    public Teachers findTeacherById(Integer tid) {
+        return teachersMapper.selectByPrimaryKey(tid);
+    }
+
+    @Override
+    public void editTeacher(Teachers teachers) {
+        teachersMapper.updateByPrimaryKeySelective(teachers);
     }
 
 
